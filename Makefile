@@ -22,7 +22,7 @@ depends	= $(wildcard $(patsubst %.o,%.d,$(objects)))
 # default command goal
 all: $(TARGET)
 
-gtest:
+gtest: $(TARGET)
 	make -C test && test/test.exe
 
 # Makefile command goal: TARGET
