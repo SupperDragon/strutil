@@ -60,3 +60,35 @@ TEST_F(test_strfcat, limit_total_size) {
     ASSERT_EQ(strlen(buff), 9);
     ASSERT_STREQ(buff, "Hello, Wo");
 }
+
+class test_trim_str: public ::testing::Test {
+public:
+    test_trim_str() {
+        strcpy(m_demo, "		  demo  		");
+    }
+    ~test_trim_str() {
+
+    }
+    char m_demo[1024];
+};
+
+TEST_F(test_trim_str, ltrim) {
+    char empty[1] = {'\0'};
+    ASSERT_EQ(ltrim(NULL), nullptr);
+    ASSERT_STREQ(ltrim(empty), "");
+    ASSERT_STREQ(ltrim(m_demo), "demo  		");
+}
+
+TEST_F(test_trim_str, rtrim) {
+    char empty[1] = {'\0'};
+    ASSERT_EQ(rtrim(NULL), nullptr);
+    ASSERT_STREQ(rtrim(empty), "");
+    ASSERT_STREQ(rtrim(m_demo), "		  demo");
+}
+
+TEST_F(test_trim_str, trim) {
+    char empty[1] = {'\0'};
+    ASSERT_EQ(trim(NULL), nullptr);
+    ASSERT_STREQ(trim(empty), "");
+    ASSERT_STREQ(trim(m_demo), "demo"); 
+}

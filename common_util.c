@@ -1,4 +1,5 @@
 #include "common_util.h"
+#include <ctype.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
@@ -36,4 +37,59 @@ int strfcat(char* dst, size_t size, const char* fmt, ...)
     va_end(args);
 
     return ret;
+}
+
+/*
+ * 移除字符串左边的空白字符
+*/
+char* ltrim(char* str)
+{
+    char* lhs = str;
+    char* rhs = str;
+
+    if (empty_str(str)) {
+        return str;
+    }
+
+    while(*rhs != '\0' && isblank(*rhs)) {
+        ++rhs;
+    }
+
+    if (rhs != lhs) {
+        while(*rhs != '\0') {
+            *lhs++ = *rhs++;
+        }
+        *lhs='\0';
+    }
+
+    return str;
+}
+
+/*
+ * 移除字符串右边的空白字符
+*/
+char* rtrim(char* str)
+{
+    char* rhs = NULL;
+
+    if (empty_str(str)) {
+        return str;
+    }
+
+    rhs = str + strlen(str) - 1;
+    while (isblank(*rhs)) {
+        *rhs-- = '\0';
+    }
+    return str;
+}
+
+/*
+ * 移除字符串两端的空白字符
+*/
+char* trim(char* str)
+{
+    if (rtrim(str)) {
+        return ltrim(str);
+    }
+    return str;
 }

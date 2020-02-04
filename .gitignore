@@ -3,4 +3,5 @@
 *.a
 *.d
 *.exe
+.vscode
 
